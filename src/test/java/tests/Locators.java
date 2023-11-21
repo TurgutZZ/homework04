@@ -8,9 +8,9 @@ import utils.Driver;
 
 import java.util.List;
 
-public class Locator {
+public class Locators {
 
-    public Locator() {
+    public Locators() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
