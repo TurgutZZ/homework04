@@ -102,9 +102,8 @@ public class BaseTest {
         driver.quit();
     }
 
-}
 
-    /*
+
     public static void takeScreenshot(WebDriver driver, String fileName) {
         // WebDriver'ı TakesScreenshot türüne dönüştür
         TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -122,7 +121,7 @@ public class BaseTest {
         }
     }
 
-     */
+}
 
 
 
