@@ -121,6 +121,18 @@ public class BaseTest {
         }
     }
 
+    public void selectHobby(String... hobbies) {
+        String locator = "//div[./label[contains(., '%s')]]//input";
+
+
+        for (String hobby : hobbies) {
+
+            clickJs(By.xpath(String.format(locator, hobby)));
+
+        }
+    }
+
+
 }
 
 

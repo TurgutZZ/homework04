@@ -17,6 +17,9 @@ public class Locators {
     @FindBy(xpath = "//img[@alt='Website for automation practice']")
     public WebElement eLogo;
 
+    @FindBy(xpath = "//h2[text()='New User Signup!']")
+    public WebElement eSingUpVerify;
+
     @FindBy(xpath = "(//ul[@class='nav navbar-nav']//a)[4]")
     public WebElement eLogin;
 
@@ -28,6 +31,9 @@ public class Locators {
 
     @FindBy(xpath = "(//form[@method='POST']//button)[2]")
     public WebElement eSignUp;
+
+    @FindBy(xpath = "//b[text()=\"Enter Account Information\"]")
+    public WebElement eEnterAccountVisible;
 
     @FindBy(xpath = "//div[@class='radio-inline']//input")
     public List<WebElement> eRadioCenders;
@@ -85,7 +91,7 @@ public class Locators {
     By lContinueLast = By.xpath(("//a[text()='Continue']"));
 
 
-    static By getGender(String gender) {
+    public static By getGender(String gender) {
         return By.xpath("(//div[@class='radio-inline']//parent::div[contains(., '" + gender + "')])[2]");
 
     }
