@@ -15,9 +15,8 @@ import utils.Driver;
 public class TestRegister extends BaseTest {
 
     Locators locators;
-    ExtentSparkReporter html;
-    ExtentReports report;
-    ExtentTest test;
+
+
 
 
     @Test
@@ -26,13 +25,7 @@ public class TestRegister extends BaseTest {
         locators = new Locators();
 
         Faker faker = new Faker();
-        html = new ExtentSparkReporter("test-output/Report.html");
-        report = new ExtentReports();
-        report.attachReporter(html);
-        test = report.createTest("automationExercies", "automation exercies sayfasinin testi");
-        test.info("ilk test adimi");
-        test.warning("dikkat");
-        test.log(Status.WARNING, "ilk log kaydi");
+
 
         Driver.getDriver().get("http://automationexercise.com");
 
@@ -96,12 +89,69 @@ public class TestRegister extends BaseTest {
         selectHobby("Sign up for our newsletter!", "Receive special offers from our partners!");
 
         //     12. Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number
+        sendKeys(locators.lFirstName, "alp");
+        sendKeys(locators.lLastName, "kalp");
+        sendKeys(locators.lCompany, "Kalbi Kirik Gmbh");
+        sendKeys(locators.lAddress1, "Kale Caddesi");
+        sendKeys(locators.lAddress2, "Kirikkale");
+
+        new Select(locators.eSelectCountry).selectByIndex(2);
+
+        sendKeys(locators.lState, "Kirgizistan");
+        sendKeys(locators.lCity, "Konya");
+        sendKeys(locators.lZipcode, "33332");
+        sendKeys(locators.lMobileNumber,"0178444444");
+
+//        13. Click 'Create Account button'
+        clickJs(locators.lCreateAccount);
+
+//       14. Verify that 'ACCOUNT CREATED!' is visible
+
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locators.lAccountCreated));
+            test.info("create edildi");
+        } catch (Exception e){
+            test.fail("Create edilemedi");
+            takeScreenShot("SC_CreateEdilemedi");
+        }
 
 
+//        15. Click 'Continue' button
+
+        clickJs(locators.lContinue);
+
+//        16. Verify that 'Logged in as username' is visible
+
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locators.lLoggedUsername));
+            test.info("Logged in as username' is visible");
+        } catch (Exception e){
+            test.fail("Logged in as username' is invisible");
+            takeScreenShot("SC_LoggedUsername");
+        }
 
 
+        //     17. Click 'Delete Account' button
+        clickJs(locators.lDeleteAccount);
+
+        //     18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
+
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(locators.eAccountDeletedText));
+            test.info("Deleted Text is Visible");
+        }catch (Exception e) {
+            test.fail("Deleted Text is not Visible");
+            takeScreenShot("SC_DeletedText");
+        }
 
 
+        try {
+            clickJs(locators.lContinueLast);
+            test.pass("Test Passed");
+        }catch (Exception e) {
+            test.fail("Test Fail");
+            takeScreenShot("SC_NotContinue");
+        }
 
 
 
@@ -113,6 +163,10 @@ public class TestRegister extends BaseTest {
 
         // Ekran görüntüsü al
         takeScreenshot(driver, "search_results.png");
+
+
+
+
 
         // Tarayıcıyı kapat
         driver.quit();

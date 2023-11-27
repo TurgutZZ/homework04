@@ -1,5 +1,9 @@
 package tests;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,6 +24,11 @@ public class BaseTest {
 
     WebDriver driver;
     WebDriverWait wait;
+    ExtentSparkReporter html;
+    ExtentReports report;
+    ExtentTest test;
+
+
 
 
     @BeforeTest
@@ -27,11 +36,19 @@ public class BaseTest {
         driver = Driver.getDriver();
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(500));
+        html = new ExtentSparkReporter("test-output/Report.html");
+        report = new ExtentReports();
+        report.attachReporter(html);
+        test = report.createTest("automationExercies", "automation exercies sayfasinin testi");
+        test.info("ilk test adimi");
+        //test.warning("dikkat");
+        //test.log(Status.WARNING, "ilk log kaydi");
 
     }
 
     @AfterTest
     public void tearDown() {
+        report.flush();
         driver.quit();
     }
 

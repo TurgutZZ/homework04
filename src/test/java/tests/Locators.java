@@ -68,6 +68,9 @@ public class Locators {
     @FindBy(xpath = "//button[text()='Create Account']")
     public WebElement eCreateAccount;
 
+    @FindBy(xpath = "//b[text()='Account Deleted!']")
+    public WebElement eAccountDeletedText;
+
 
     By lFirstName = By.xpath("//input[@id='first_name']");
     By lLastName = By.xpath("//input[@id='last_name']");
@@ -89,6 +92,8 @@ public class Locators {
     By lDeleteAccount = By.xpath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[5]/a");
 
     By lContinueLast = By.xpath(("//a[text()='Continue']"));
+
+    By lLoggedUsername = By.cssSelector(".fa.fa-user");
 
 
     public static By getGender(String gender) {
